@@ -19,7 +19,6 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         launch();
-        System.out.println("abo dy mada");
-        System.out.println("hello ");
+        System.out.println("sei medhat");
     }
 }
