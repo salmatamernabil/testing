@@ -1,55 +1,50 @@
 package com.example.testingproject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Bank {
-    private String ID;
-    private String name;
-    private ArrayList <Customer> customer;
+    private ArrayList<Account> accounts;
+    private ArrayList<Loan> loans;
 
-    public Bank(String ID, String name, ArrayList<Customer> customer) {
-        this.ID = ID;
-        this.name = name;
-        this.customer = customer;
-    }
+    private ArrayList<Client> clients;
 
     public Bank() {
+        accounts = new ArrayList<>();
+        loans = new ArrayList<>();
     }
 
-    public String getID() {
-        return ID;
+    public void add_account(Account account) {
+        accounts.add(account);
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void remove_account(Account account) {
+        accounts.remove(account);
     }
 
-    public String getName() {
-        return name;
+    public Loan open_loan(Client client, double amount, int duration, double interest_rate) {
+        Loan loan = new Loan(client, amount, duration, interest_rate);
+        loans.add(loan);
+        return loan;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void close_loan(Loan loan) {
+        loans.remove(loan);
     }
 
-    public ArrayList<Customer> getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(ArrayList<Customer> customer) {
-        this.customer = customer;
-    }
-    public boolean provideLoan(double loanAmount , Customer c11) {
-        if (c11.getBalance() >= loanAmount / 2) {
-            c11.getBalance() += loanAmount;
-            System.out.println("$" + loanAmount + " loan provided. New balance is $" + c.getBalance());
-            return true;
+    public Account get_account_by_id(String account_id) {
+        for (Account account : accounts) {
+            if (account.get_id().equals(account_id)) {
+                return account;
+            }
         }
-        else {
-            System.out.println("Insufficient funds for loan.");
-            return false;
-        }
+        return null;
     }
 
+    public Loan get_loan_by_id(String loan_id) {
+        for (Loan loan : loans) {
+            if (loan.get_id().equals(loan_id)) {
+                return loan;
+            }
+        }
+        return null;
+    }
 }
